@@ -8,6 +8,14 @@
 
 A professional Termux startup-banner customizer. Pick from **35 ASCII logo styles**, **35 command-prompt signs**, and **10 color themes** — set your name once, and your banner appears every time you open Termux.
 
+<p align="center">
+  <img src="assets/demo.gif" width="700" alt="Termux Banner Tool demo">
+</p>
+
+<p align="center">
+  <img src="assets/preview.png" width="700" alt="Banner preview">
+</p>
+
 ```
  _  ___                     _       _
 | |/ / |__   __ _ _ __   __| | __ _| | ____ _ _ __
