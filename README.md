@@ -39,7 +39,7 @@ A professional Termux startup-banner customizer. Pick from **35 ASCII logo style
 
 ```bash
 pkg install -y git
-git clone https://github.com/<your-username>/termux-banner-tool.git
+git clone https://github.com/rupakkhandakar/termux-banner-tool.git
 cd termux-banner-tool
 bash install.sh
 ```
