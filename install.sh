@@ -397,17 +397,7 @@ reset_default() {
   echo -e "  ${IY}Are you sure? (y/n): ${IN}"
   read -r confirm
   if [[ "$confirm" == "y" || "$confirm" == "Y" ]]; then
-    local latest
-    latest="$(ls -t "$BACKUP_DIR"/bashrc.backup.* 2>/dev/null | head -n 1)"
-    if [[ -n "$latest" ]]; then
-      cp "$latest" "$HOME/.bashrc"
-      echo -e "  ${IG}✅ Original .bashrc restored.${IN}"
-    else
-      printf '%s\n' "PS1='\\w \\$ '" > "$HOME/.bashrc"
-      echo -e "  ${IG}✅ No backup found — wrote a clean default .bashrc.${IN}"
-    fi
-    rm -f "$CONFIG_FILE" "$BANNER_OUT"
-    echo -e "  ${IG}✅ Tool settings cleared. Restart Termux.${IN}"
+    do_reset_now
   else
     echo -e "  ${IY}Reset cancelled.${IN}"
   fi
@@ -464,8 +454,56 @@ main_menu() {
   done
 }
 
+do_reset_now() {
+  local latest
+  latest="$(ls -t "$BACKUP_DIR"/bashrc.backup.* 2>/dev/null | head -n 1)"
+  if [[ -n "$latest" ]]; then
+    cp "$latest" "$HOME/.bashrc"
+    echo -e "  ${IG}✅ Original .bashrc restored from backup.${IN}"
+  else
+    printf '%s\n' "PS1='\\w \\$ '" > "$HOME/.bashrc"
+    echo -e "  ${IG}✅ No backup found — wrote a clean default .bashrc.${IN}"
+  fi
+  rm -f "$CONFIG_FILE" "$BANNER_OUT"
+  echo -e "  ${IG}✅ Settings cleared. Restart Termux.${IN}"
+}
+
+show_help() {
+  echo -e "${IC}Termux Banner Tool v2.0${IN}"
+  echo ""
+  echo -e "  ${IW}Usage:${IN}"
+  echo -e "    bash install.sh              Open the interactive menu"
+  echo -e "    bash install.sh --install    Apply banner + prompt (no menu)"
+  echo -e "    bash install.sh --reset      Restore original Termux setup"
+  echo -e "    bash install.sh --uninstall  Remove the tool completely"
+  echo -e "    bash install.sh --help       Show this help"
+  echo -e "    bash uninstall.sh            Standalone uninstaller"
+}
+
 # ═══════════════ Start ═══════════════
 check_deps
 init_config
 if [[ ! -f "$BANNER_OUT" ]]; then rebuild_all; fi
+
+case "${1:-}" in
+  --install)
+    rebuild_all
+    echo -e "  ${IG}✅ Installed! Restart Termux to see your banner.${IN}"
+    exit 0 ;;
+  --reset)
+    do_reset_now
+    exit 0 ;;
+  --uninstall)
+    bash "$REPO_DIR/uninstall.sh"
+    exit 0 ;;
+  --help|-h)
+    show_help
+    exit 0 ;;
+  "")
+    ;;
+  *)
+    echo -e "  ${IR}Unknown option: $1${IN}"
+    show_help
+    exit 1 ;;
+esac
 main_menu

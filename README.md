@@ -64,7 +64,18 @@ bash install.sh
 
 Every choice rebuilds your banner instantly. Restart Termux (or run `source ~/.bashrc`) to see prompt changes.
 
-### Uninstall (without the menu)
+### ⚡ Quick Commands (no menu needed)
+
+```bash
+cd termux-banner-tool
+
+bash install.sh --install    # install / apply your saved setup
+bash install.sh --reset      # reset to your original Termux setup
+bash install.sh --uninstall  # uninstall the tool completely
+bash install.sh --help       # show all options
+```
+
+Or use the standalone uninstaller:
 
 ```bash
 bash uninstall.sh
