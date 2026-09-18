@@ -16,18 +16,6 @@ A professional Termux startup-banner customizer. Pick from **35 ASCII logo style
   <img src="assets/preview.png" width="700" alt="Banner preview">
 </p>
 
-```
- _  ___                     _       _
-| |/ / |__   __ _ _ __   __| | __ _| | ____ _ _ __
-| ' /| '_ \ / _` | '_ \ / _` |/ _` | |/ / _` | '__|
-...
- ┌────────────────────────────────────────────────────┐
- │ 👤 User    : Khandakar                             │
- │ 📅 Date    : Friday, 18 September 2026             │
- │ ⏰ Time    : 11:29:40 PM                            │
- └────────────────────────────────────────────────────┘
-```
-
 ---
 
 ## ✨ Features
